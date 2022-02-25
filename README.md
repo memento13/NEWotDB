@@ -1,5 +1,5 @@
 # otDB
-##개요
+## 개요
 인터넷db 기말프로젝트<br>
 오라클 데이터베이스의 샘플 데이터를 JPA로 옮겨서 가상으로 존재하는 컴퓨터 부품 판매점의 재고 관리를 웹으로 구현한 것 입니다. <br>
 <br>
@@ -14,14 +14,14 @@
 http://146.56.45.175:8080 <br>
 db도 같은 서버에서 도커 mariadb로 돌아가는 중입니다.
 
-##기술스택
+## 기술스택
 * SpringBoot 2.4.5
 * MariaDB
 * Linux(ubuntu, Oracle Cloud)
 * Docker
 * Thymeleaf
 
-##데이터베이스 다이어그램
+## 데이터베이스 다이어그램
 
 [오라클 튜토리얼 페이지 참고](https://www.oracletutorial.com/getting-started/oracle-sample-database/)
 <br><br>
