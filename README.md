@@ -15,6 +15,7 @@ http://146.56.45.175:8080 <br>
 db도 같은 서버에서 도커 mariadb로 돌아가는 중입니다.
 
 ## 기술스택
+* OpenJDK 11
 * SpringBoot 2.4.5
 * MariaDB
 * Linux(ubuntu, Oracle Cloud)
