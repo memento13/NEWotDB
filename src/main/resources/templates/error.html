@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>error</title>
+</head>
+
+<body>
+    <script th:inline="javascript">
+        window.onload = function () {
+            /*<![CDATA[*/
+            var msg = [[(${msg})]];
+            alert(msg);
+            /*]]>*/
+            location.href = "/";
+        }
+    </script>
+<!--    <p th:text="${msg}"></p>-->
+</body>
+</html>

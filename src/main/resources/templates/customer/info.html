@@ -1,0 +1,153 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <title>고객 정보</title>
+
+    <!--    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/starter-template/">-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/css/starter-template.css" th:href="@{/css/starter-template.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common::menu">
+
+</nav>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <div class="jumbotron">
+            <h1 class="text-left">고객 정보</h1><br>
+            <div class="row text-left">
+                <dt class="col-sm-3">고객 id</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${customer.id}">고객 id</p>
+                </dd>
+
+                <dt class="col-sm-3">고객 이름</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${customer.name}">고객 이름</p>
+                </dd>
+
+                <dt class="col-sm-3">고객 주소</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${customer.address}">고객 주소</p>
+                </dd>
+
+                <dt class="col-sm-3">고객 웹사이트</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${customer.website}">고객 웹사이트</p>
+                </dd>
+
+                <dt class="col-sm-3">고객 신용한도</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${customer.credit_limit}">고객 신용한도</p>
+                </dd>
+            </div>
+            <th:block th:if="${customer.contactList != null}">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0" >
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                직원 목록
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>연락처</th>
+                                    <th>이메일</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="contact : ${customer.contactList}">
+                                    <td th:text="${contact.first_name + contact.last_name}"></td>
+                                    <td th:text="${contact.phone}"></td>
+                                    <td th:text="${contact.email}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </th:block>
+        </div>
+
+        <div id="orderListView">
+            <th:block th:if="${orderList != null}">
+                <h3>주문 정보</h3>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>주문 일자</th>
+                        <th>주문 번호</th>
+                        <th>주문 상태</th>
+                        <th>영업 사원</th>
+                        <th>상세 보기</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="order : ${orderList}">
+                        <td th:text="${order.order_date}"></td>
+                        <td th:text="${order.id}"></td>
+                        <td th:text="${order.status}"></td>
+                        <td th:if="${order.salesMan != null}" th:text="${order.salesMan.first_name + order.salesMan.last_name}"></td>
+                        <td th:unless="${order.salesMan != null}" th:text="없음"></td>
+                        <td><a th:href="'/order/orderInfo?orderId='+${order.id}" class="btn btn-primary">상세보기</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
+
+    </div>
+
+</main><!-- /.container -->
+
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<!--<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/js/bootstrap.bundle.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>

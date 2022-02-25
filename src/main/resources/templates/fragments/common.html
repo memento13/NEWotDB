@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="menu">
+    <a class="navbar-brand" href="/">MT사 판매/재고관리 시스템</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">사원관리</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="/employee/findAll?page=0">모든 사원 정보 조회(R)</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">제품관리</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                    <a class="dropdown-item" href="/product/category">제품 품목별 조회(R)</a>
+                    <a class="dropdown-item" href="/product/name">제품 이름별 조회(R)</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">고객관리</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                    <a class="dropdown-item" href="/customer/name">고객 이름별 조회(R)</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">재고관리</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a class="dropdown-item" href="/inventory/location">지역별 재고 조회(R)</a>
+                    <a class="dropdown-item" href="/inventory/new">창고 적재 관리(U/C)</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">등록</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown05">
+                    <a class="dropdown-item" href="/category/new">카테고리 등록(C)</a>
+                    <a class="dropdown-item" href="/product/new">제품 등록(C)</a>
+                </div>
+            </li>
+        </ul>
+
+        <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/account/login}"
+           sec:authorize="!isAuthenticated()">Login</a>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <!--                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+            <span class="text-white mx-2" sec:authentication="name">사용자</span>
+            <!--                <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>-->
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </div>
+</nav>
+
+
+</body>
+
+</html>

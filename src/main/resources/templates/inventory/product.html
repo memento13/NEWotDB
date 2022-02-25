@@ -1,0 +1,123 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <title>지역 물건 목록</title>
+
+    <!--    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/starter-template/">-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/css/starter-template.css" th:href="@{/css/starter-template.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common::menu">
+
+</nav>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <div class="jumbotron text-left">
+            <h1>제품 정보</h1><br>
+            <div class="row">
+                <dt class="col-sm-3">상세 주소</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${location.postal_code}+' '+${location.address}">상세 주소</p>
+                </dd>
+
+                <dt class="col-sm-3">주소</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${location.city}+' '+${location.state}+' '+${location.country.name}+' '+${location.country.region.name}">주소</p>
+                </dd>
+
+                <dt class="col-sm-3">상품 id</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${product.id}">상품 id</p>
+                </dd>
+
+                <dt class="col-sm-3">상품 분류</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${product.category.name}">상품 분류</p>
+                </dd>
+
+                <dt class="col-sm-3">상품명</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${product.name}">상품명</p>
+                </dd>
+
+                <dt class="col-sm-3">상품 설명</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${product.description}">상품 설명</p>
+                </dd>
+
+                <dt class="col-sm-3">스탠다드 코스트</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${product.standard_cost}">스탠다드 코스트</p>
+                </dd>
+
+                <dt class="col-sm-3">리스트 프라이스</dt>
+                <dd class="col-sm-9">
+                    <p th:text="${product.list_price}">리스트 프라이스</p>
+                </dd>
+            </div>
+        </div>
+
+
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>창고명</th>
+                    <th>수량</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="inventory : ${inventoryList}">
+                    <td th:text="${inventory.id.warehouse.name}"></td>
+                    <td><p th:text="${inventory.quantity}"></p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main><!-- /.container -->
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>

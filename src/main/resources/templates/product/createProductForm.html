@@ -1,0 +1,101 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <title>제품 등록</title>
+
+    <!--    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/starter-template/">-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <script>
+        $('input.floatNumber').on('input', function() {
+            this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');
+        });
+    </script>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/css/starter-template.css" th:href="@{/css/starter-template.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common::menu">
+
+</nav>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>제품 등록</h1>
+        <div class="jumbotron text-left">
+            <form role="form" th:action="@{/product/new}" method="post" th:object="${productForm}">
+                <div class="form-group">
+                    <label th:for="name">이름</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="제품 이름 입력">
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect date</p>
+                </div>
+                <div class="form-group">
+                    <label th:for="description">제품설명</label>
+                    <textarea type="text" th:field="*{description}" class="form-control" placeholder="제품 이름 입력"></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Incorrect date</p>
+                </div>
+                <div class="form-group">
+                    <label th:for="standard_cost">스탠다드 코스트</label>
+                    <input type="text" th:field="*{standard_cost}" class="form-control floatNumber" placeholder="스탠다드 코스트 입력">
+                    <p th:if="${#fields.hasErrors('standard_cost')}" th:errors="*{standard_cost}">Incorrect date</p>
+                </div>
+                <div class="form-group">
+                    <label th:for="list_price">리스트 프라이스</label>
+                    <input type="text" th:field="*{list_price}" class="form-control floatNumber" placeholder="리스트 프라이스 입력">
+                    <p th:if="${#fields.hasErrors('list_price')}" th:errors="*{list_price}">Incorrect date</p>
+                </div>
+                <div class="form-group">
+                    <label th:for="category">카테고리</label>
+                    <select class="form-control" id="category" name="category">
+                        <option th:each="category : ${categoryList}" th:text="${category.name}" th:value="${category.id}" th:selected="${category.id==1}" ></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">생성</button>
+            </form>
+
+        </div>
+    </div>
+
+</main><!-- /.container -->
+
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<!--<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/js/bootstrap.bundle.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>

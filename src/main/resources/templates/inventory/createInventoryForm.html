@@ -1,0 +1,93 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.80.0">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <title>창고 적재 관리</title>
+
+    <!--    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/starter-template/">-->
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <script>
+        $('input.floatNumber').on('input', function() {
+            this.value = this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g, '$1');
+        });
+    </script>
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/css/starter-template.css" th:href="@{/css/starter-template.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common::menu">
+
+</nav>
+
+<main role="main" class="container">
+
+    <div class="starter-template">
+        <h1>창고 적재 관리</h1>
+        <div class="jumbotron text-left">
+            <form role="form" th:action="@{/inventory/new}" method="post" th:object="${inventoryForm}">
+
+                <div class="form-group">
+                    <label th:for="warehouse">창고 선택</label>
+                    <select class="form-control" id="warehouse" name="warehouse">
+                        <option th:each="warehouse : ${warehouseList}" th:text="${warehouse.name}" th:value="${warehouse.id}" th:selected="${warehouse.id==warehouseFirstId}" ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label th:for="product">제품 선택</label>
+                    <select class="form-control" id="product" name="product">
+                        <option th:each="product : ${productList}" th:text="${product.name}" th:value="${product.id}" th:selected="${product.id==productFirstId}" ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label th:for="quantity">적재할 수량 입력</label>
+                    <input type="number" th:field="*{quantity}" class="form-control" placeholder="적재할 수량 입력">
+                    <p th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Incorrect date</p>
+                </div>
+                <button type="submit" class="btn btn-primary">적재하기</button>
+            </form>
+
+        </div>
+    </div>
+
+</main><!-- /.container -->
+
+
+<!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+<!--<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/js/bootstrap.bundle.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>
